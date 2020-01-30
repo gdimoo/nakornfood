@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1024309103110",
+    "firebase_url": "https://foodmanage-e63a1.firebaseio.com",
+    "project_id": "foodmanage-e63a1",
+    "storage_bucket": "foodmanage-e63a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024309103110:android:16d7a1f2ef0df85effd187",
+        "android_client_info": {
+          "package_name": "com.example.arfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024309103110-3ptbkb4ro9e7lsgp44a2puc80qnb3ilj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaOEZbW9JO9h6tMAoONHmgaJyDrc3IWNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024309103110-3ptbkb4ro9e7lsgp44a2puc80qnb3ilj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
