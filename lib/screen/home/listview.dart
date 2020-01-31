@@ -6,18 +6,16 @@ class Listview extends StatelessWidget {
 
   final List<Map> menu = [
     {
-      "name": "แฮมเบอร์เกอร์",
-      "location": "572 Statan NY, 12483",
-      "type": "Higher Secondary School",
+      "name": "เบอร์เกอร์ฮัท",
+      "type": "คัดสรรวัตถุดิบอย่างดีเพื่อคุณ เบอร์เกอร์ชิ้นใหญ่ กำลังพอดีทานคู่กับเฟรนช์ฟรายส์อิ่มกำลังดี  ",
       "logoText":
-          "https://positioningmag.com/wp-content/uploads/2019/10/open_mcdonaldPlantbased1.jpg"
+          "https://firebasestorage.googleapis.com/v0/b/foodmanage-e63a1.appspot.com/o/OYH6PQ0.jpg?alt=media&token=844dfac4-0405-4e1e-838c-110dcb3e5ebc"
     },
     {
-      "name": "ปลากระพงราดพริก",
-      "location": "234 Road Kathmandu, Nepal",
-      "type": "Higher Secondary School",
+      "name": "ขาไก่ทอด",
+      "type": "ขาไก่นุ่มๆ กับแป้งกรอบๆ และเฟรนฟราย คัดสรรวัตถุดิบที่สดใหม่ทุกวันเพื่อคุณ",
       "logoText":
-          "http://static.asiawebdirect.com/m/phuket/portals/phuket-com/homepage/dining/howto/pagePropertiesImage/thai-food.jpg"
+          "https://firebasestorage.googleapis.com/v0/b/foodmanage-e63a1.appspot.com/o/2462.jpg?alt=media&token=ec4c343e-4680-4441-825c-7e26a9e0c1ce"
     },
     {
       "name": "Kinder Garden",
@@ -68,7 +66,7 @@ class Listview extends StatelessWidget {
     return SingleChildScrollView(
         child: Container(
         padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-        height: MediaQuery.of(context).size.height * 0.33,
+        height: MediaQuery.of(context).size.height * 0.35,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
             itemCount: menu.length, itemBuilder: (context, index) {
@@ -108,7 +106,7 @@ class Listview extends StatelessWidget {
       // textAlign: TextAlign.center,
       style: TextStyle(
         fontFamily: "Anakotmai",
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: FontWeight.w600,
         color: Color(0xff000000),
         
@@ -124,7 +122,7 @@ class Listview extends StatelessWidget {
       
       style: TextStyle(
         fontFamily: "Anakotmai",
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: FontWeight.w500,
         color: Color(0xff000000).withOpacity(0.5),
 

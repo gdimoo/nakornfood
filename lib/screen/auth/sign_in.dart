@@ -32,13 +32,13 @@ class _SignInState extends State<SignIn> {
             appBar: AppBar(
               backgroundColor: Color(0xfff5f5f2),
               elevation: 0.0,
-              actions: <Widget>[
-                FlatButton.icon(
-                  icon: Icon(Icons.person),
-                  label: Text('Register'),
-                  onPressed: () => widget.toggleView(),
-                ),
-              ],
+              // actions: <Widget>[
+              //   FlatButton.icon(
+              //     icon: Icon(Icons.person),
+              //     label: Text('Register'),
+              //     onPressed: () => widget.toggleView(),
+              //   ),
+              // ],
             ),
             body: ListView(
               children: <Widget>[

@@ -156,13 +156,10 @@ class _RegisterState extends State<Register> {
             appBar: AppBar(
               backgroundColor: Color(0xfff5f5f2),
               elevation: 0.0,
-              actions: <Widget>[
-                FlatButton.icon(
-                  icon: Icon(Icons.person),
-                  label: Text('Sign in'),
-                  onPressed: () => widget.toggleView(),
-                ),
-              ],
+              leading: new IconButton(
+          icon: new Icon(Icons.arrow_back_ios,color: Colors.black),
+          onPressed: ()  => widget.toggleView(),
+      ),
             ),
             body: SingleChildScrollView(
               child: Container(
@@ -229,7 +226,7 @@ class _RegisterState extends State<Register> {
                       SizedBox(height: 20.0),
                       TextFormField(
                         decoration:
-                            textInputDecoration.copyWith(hintText: 'email'),
+                            textInputDecoration.copyWith(hintText: 'อีเมล์'),
                         validator: (val) =>
                             val.isEmpty ? 'Enter an email' : null,
                         onChanged: (val) {
@@ -239,7 +236,7 @@ class _RegisterState extends State<Register> {
                       SizedBox(height: 20.0),
                       TextFormField(
                         decoration:
-                            textInputDecoration.copyWith(hintText: 'password'),
+                            textInputDecoration.copyWith(hintText: 'รหัสผ่าน'),
                         obscureText: true,
                         validator: (val) => val.length < 6
                             ? 'Enter a password 6+ chars long'

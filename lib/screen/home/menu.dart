@@ -1,4 +1,5 @@
 import 'package:arfood/screen/home/home.dart';
+import 'package:arfood/screen/home/showmenu.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -14,6 +15,18 @@ class _MenuState extends State<Menu> {
   final primary = Color(0xff696b9e);
   final secondary = Color(0xfff29a94);
   final List<Map> Menu = [
+    {
+      "name": "เบอร์เกอร์ฮัท",
+      "type": "คัดสรรวัตถุดิบอย่างดีเพื่อคุณ เบอร์เกอร์ชิ้นใหญ่ กำลังพอดีทานคู่กับเฟรนช์ฟรายส์อิ่มกำลังดี  ",
+      "logoText":
+          "https://firebasestorage.googleapis.com/v0/b/foodmanage-e63a1.appspot.com/o/OYH6PQ0.jpg?alt=media&token=844dfac4-0405-4e1e-838c-110dcb3e5ebc"
+    },
+    {
+      "name": "ขาไก่ทอด",
+      "type": "ขาไก่นุ่มๆ กับแป้งกรอบๆ และเฟรนฟราย คัดสรรวัตถุดิบที่สดใหม่ทุกวันเพื่อคุณ",
+      "logoText":
+          "https://firebasestorage.googleapis.com/v0/b/foodmanage-e63a1.appspot.com/o/2462.jpg?alt=media&token=ec4c343e-4680-4441-825c-7e26a9e0c1ce"
+    },
     {
       "name": "แฮมเบอร์เกอร์",
       "location": "572 Statan NY, 12483",
@@ -114,6 +127,7 @@ class _MenuState extends State<Menu> {
                 height: MediaQuery.of(context).size.height,
                 width: double.infinity,
                 child: ListView.builder(
+                  
                     itemCount: Menu.length,
                     itemBuilder: (BuildContext context, int index) {
                       return buildList(context, index);
@@ -190,7 +204,13 @@ class _MenuState extends State<Menu> {
           );
   }
   Widget buildList(BuildContext context, int index) {
-    return Container(
+    return 
+    GestureDetector(
+       onTap: (){
+           Navigator.push
+        (context,MaterialPageRoute(builder: (context) => Showmenu()));
+        },
+        child: new Container(
       
       decoration: BoxDecoration(
         boxShadow: [
@@ -287,6 +307,7 @@ class _MenuState extends State<Menu> {
       
         ],
       ),
+    ),
     );
   }
 }

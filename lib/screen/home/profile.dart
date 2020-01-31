@@ -53,7 +53,7 @@ return Scaffold(
           image: new DecorationImage(
           fit: BoxFit.fill,
           image: new NetworkImage(
-                 "https://i.imgur.com/BoN9kdC.png")
+                 "https://firebasestorage.googleapis.com/v0/b/foodmanage-e63a1.appspot.com/o/Untitled-1.png?alt=media&token=90e24817-ef39-44f5-b9ac-87cfb06bbc1d")
                  )
 )),
               SizedBox(height: 10.0),

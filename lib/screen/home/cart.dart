@@ -14,35 +14,19 @@ class _CartState extends State<Cart> {
   final secondary = Color(0xfff29a94);
   final List<Map> menu = [
     {
-      "name": "แฮมเบอร์เกอร์",
+      "name": "เบอร์เกอร์ฮัท",
+      "type": "คัดสรรวัตถุดิบอย่างดีเพื่อคุณ เบอร์เกอร์ชิ้นใหญ่ กำลังพอดีทานคู่กับเฟรนช์ฟรายส์อิ่มกำลังดี  ",
       "price": "200฿",
-      "type": "Higher Secondary School",
+
       "logoText":
-          "https://positioningmag.com/wp-content/uploads/2019/10/open_mcdonaldPlantbased1.jpg"
+          "https://firebasestorage.googleapis.com/v0/b/foodmanage-e63a1.appspot.com/o/OYH6PQ0.jpg?alt=media&token=844dfac4-0405-4e1e-838c-110dcb3e5ebc"
     },
     {
-      "name": "ปลากระพงราดพริก",
+      "name": "ขาไก่ทอด",
       "price": "200฿",
-      "location": "234 Road Kathmandu, Nepal",
-      "type": "Higher Secondary School",
+      "type": "ขาไก่นุ่มๆ กับแป้งกรอบๆ และเฟรนฟราย คัดสรรวัตถุดิบที่สดใหม่ทุกวันเพื่อคุณ",
       "logoText":
-          "http://static.asiawebdirect.com/m/phuket/portals/phuket-com/homepage/dining/howto/pagePropertiesImage/thai-food.jpg"
-    },
-    {
-      "name": "Kinder Garden",
-      "price": "200฿",
-      "location": "572 Statan NY, 12483",
-      "type": "Play Group School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2016/06/09/18/36/logo-1446293_960_720.png"
-    },
-    {
-      "name": "WilingTon Cambridge",
-      "price": "200฿",
-      "location": "Kasai Pantan NY, 12483",
-      "type": "Lower Secondary School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
+          "https://firebasestorage.googleapis.com/v0/b/foodmanage-e63a1.appspot.com/o/2462.jpg?alt=media&token=ec4c343e-4680-4441-825c-7e26a9e0c1ce"
     },
   ];
 
@@ -184,7 +168,7 @@ class _CartState extends State<Cart> {
         
       ),
     ),Text(
-      "298 ฿",
+      "400 ฿",
       textAlign: TextAlign.center,
       style: TextStyle(
         fontFamily: "Anakotmai",
@@ -215,7 +199,7 @@ class _CartState extends State<Cart> {
         
       ),
     ),Text(
-      "29 ฿",
+      "20 ฿",
       textAlign: TextAlign.center,
       style: TextStyle(
         fontFamily: "Anakotmai",
@@ -246,7 +230,7 @@ class _CartState extends State<Cart> {
         
       ),
     ),Text(
-      "30 ฿",
+      "0 ฿",
       textAlign: TextAlign.center,
       style: TextStyle(
         fontFamily: "Anakotmai",
@@ -277,7 +261,7 @@ class _CartState extends State<Cart> {
         
       ),
     ),Text(
-      "299 ฿",
+      "380 ฿",
       textAlign: TextAlign.center,
       style: TextStyle(
         fontFamily: "Anakotmai",

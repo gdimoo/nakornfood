@@ -8,7 +8,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'streambuilder_firestore.dart';
 
-  Position position;
+Position position;
+
 class Locationpage extends StatefulWidget {
   @override
   LocationpageState createState() => LocationpageState();
@@ -18,41 +19,41 @@ class LocationpageState extends State<Locationpage> {
   Completer<GoogleMapController> _controller = Completer();
   Widget _child;
 // Set<Marker> markers = Set();
-  Map<MarkerId, Marker> markers = <MarkerId, Marker>{}; // CLASS MEMBER, MAP OF MARKS
-List<dynamic> users = [];
-List<double> locationslat = [];
-List<double> locationslng = [];
-  Future<String> submitAll() async {
+  Map<MarkerId, Marker> markers =
+      <MarkerId, Marker>{}; // CLASS MEMBER, MAP OF MARKS
+  List<dynamic> users = [];
+  List<dynamic> markerIDs = [];
+  List<double> locationslat = [];
+  List<double> locationslng = [];
+Firestore db = Firestore.instance;
 
+  submitAll() async {
+    db
+        .collection('users')
+        .snapshots()
+        .listen((data) => data.documents.forEach((doc) {
+              // print(doc["store"]['storename']);
+              // print(users.add(doc.data));
+              markerIDs.add(doc["store"]['storename']);
 
-Firestore.instance
-    .collection('users')
-    .snapshots()
-    .listen((data) => data.documents.forEach(
-          (doc){
-            print(doc["store"]['storename']);
-            print(users.add(doc.data));
-        markerIDs.add(doc["store"]['storename']);
-      
-        // locationslat.add(double.parse(doc["store"]['location']['lat']))
-        // locationslat.add(double.parse(doc["store"]['location']['lng']))
-          
-   print(markerIDs.length);
-   print(markerIDs);
-
-      return 'success';
+              // print(markerIDs.length);
+              // print(markerIDs);
+              // setState(() => this.users.add(doc["store"]['storename']));
+            }
+            
+            ));
+            
+    return 'success';
   }
-  )
-  );
-  }
 
-        void getMarker() async{
-   await submitAll();
-   print("Loaded");
-   
-   print("get");
-   print(markerIDs);
-}
+  // void getMarker() async {
+  //   if (await submitAll() != 'success') {
+  //     print("Loaded");
+  //   } else if(await submitAll() == 'success') {
+  //     print("get");
+  //     print(users);
+  //   }
+  // }
 
 // void _add(_markerIdVal,_latitude,_longitude) {
 //     var markerIdVal = _markerIdVal;
@@ -79,10 +80,9 @@ Firestore.instance
 //       // markers[markerId]= marker;
 //     });
 // }
-  
 
 //           (){
-//               return 
+//               return
 //          Marker(
 //   markerId: MarkerId(doc["store"]['storename']),
 //   position: LatLng(double.parse(doc["store"]['location']['lat']), double.parse(doc["store"]['location']['lng'])),
@@ -92,55 +92,63 @@ Firestore.instance
 //   ),
 // );
 //           }
-          // print(doc["acc"]['name'])
-        
-          // )
-          // );
+  // print(doc["acc"]['name'])
+
+  // )
+  // );
 
   // }
-    
 
   @override
   void initState()  {
-    Future.delayed(Duration.zero, (){
-    getMarker();
-    print(markerIDs);
-    _child=SpinKitFadingCircle(
-  itemBuilder: (BuildContext context, int index) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: index.isEven ? Colors.red : Colors.green,
-      ),
-    );
-  },
-);});
+    // Future.delayed(Duration.zero, () {
+      //  getMarker();
+      submitAll();
+      // print(markerIDs);
+      
+      _child = SpinKitFadingCircle(
+        itemBuilder: (BuildContext context, int index) {
+          return DecoratedBox(
+            decoration: BoxDecoration(
+              color: index.isEven ? Colors.red : Colors.green,
+            ),
+          );
+        },
+      );
+    // });
     // getCurrentLocation();
 
     super.initState();
   }
-  void getCurrentLocation() async{
+  test(){
+    print(markerIDs);
+  }
+
+  void getCurrentLocation() async {
     Position res = await Geolocator().getCurrentPosition();
     setState(() {
       position = res;
-      _child=mapWidget();
-      
+      _child = mapWidget();
     });
   }
-  Widget mapWidget(){
+
+  Widget mapWidget() {
     return Stack(
-        children: <Widget>[
-          _buildGoogleMap(context),
-          _zoomminusfunction(),
-          _zoomplusfunction(),
-          _buildContainer(),
-        ],
-      );
+      children: <Widget>[
+        _buildGoogleMap(context),
+        _zoomminusfunction(),
+        _zoomplusfunction(),
+        _buildContainer(),
+      ],
+    );
   }
-    double zoomVal=5.0;
+
+  double zoomVal = 5.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
+      appBar: AppBar(
+
         backgroundColor: Color(0xfff5f5f2),
         centerTitle: true,
         title: Text(
@@ -153,46 +161,55 @@ Firestore.instance
             color: Color(0xff000000),
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: (){
+              print(markerIDs);
+            },
+          )
+        ],
       ),
       body: _child,
     );
   }
 
- Widget _zoomminusfunction() {
-
+  Widget _zoomminusfunction() {
     return Align(
       alignment: Alignment.topLeft,
       child: IconButton(
-            icon: Icon(FontAwesomeIcons.searchMinus,color:Color(0xff6200ee)),
-            onPressed: () {
-              zoomVal--;
-             _minus( zoomVal);
-            }),
+          icon: Icon(FontAwesomeIcons.searchMinus, color: Color(0xff6200ee)),
+          onPressed: () {
+            zoomVal--;
+            _minus(zoomVal);
+          }),
     );
- }
- Widget _zoomplusfunction() {
-   
+  }
+
+  Widget _zoomplusfunction() {
     return Align(
       alignment: Alignment.topRight,
       child: IconButton(
-            icon: Icon(FontAwesomeIcons.searchPlus,color:Color(0xff6200ee)),
-            onPressed: () {
-              zoomVal++;
-              _plus(zoomVal);
-            }),
+          icon: Icon(FontAwesomeIcons.searchPlus, color: Color(0xff6200ee)),
+          onPressed: () {
+            zoomVal++;
+            _plus(zoomVal);
+          }),
     );
- }
-
- Future<void> _minus(double zoomVal) async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(40.712776, -74.005974), zoom: zoomVal)));
   }
+
+  Future<void> _minus(double zoomVal) async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(40.712776, -74.005974), zoom: zoomVal)));
+  }
+
   Future<void> _plus(double zoomVal) async {
     final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(40.712776, -74.005974), zoom: zoomVal)));
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(40.712776, -74.005974), zoom: zoomVal)));
   }
 
-  
   Widget _buildContainer() {
     return Align(
       alignment: Alignment.bottomLeft,
@@ -207,21 +224,27 @@ Firestore.instance
               padding: const EdgeInsets.all(8.0),
               child: _boxes(
                   "https://lh5.googleusercontent.com/p/AF1QipO3VPL9m-b355xWeg4MXmOQTauFAEkavSluTtJU=w225-h160-k-no",
-                  40.738380, -73.988426,"Gramercy Tavern"),
+                  40.738380,
+                  -73.988426,
+                  "Gramercy Tavern"),
             ),
             SizedBox(width: 10.0),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: _boxes(
                   "https://lh5.googleusercontent.com/p/AF1QipMKRN-1zTYMUVPrH-CcKzfTo6Nai7wdL7D8PMkt=w340-h160-k-no",
-                  40.761421, -73.981667,"Le Bernardin"),
+                  40.761421,
+                  -73.981667,
+                  "Le Bernardin"),
             ),
             SizedBox(width: 10.0),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: _boxes(
                   "https://images.unsplash.com/photo-1504940892017-d23b9053d5d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-                  40.732128, -73.999619,"Blue Hill"),
+                  40.732128,
+                  -73.999619,
+                  "Blue Hill"),
             ),
           ],
         ),
@@ -229,42 +252,42 @@ Firestore.instance
     );
   }
 
-  Widget _boxes(String _image, double lat,double long,String restaurantName) {
-    return  GestureDetector(
-        onTap: () {
-          _gotoLocation(lat,long);
-        },
-        child:Container(
-              child: new FittedBox(
-                child: Material(
-                    color: Colors.white,
-                    elevation: 14.0,
-                    borderRadius: BorderRadius.circular(24.0),
-                    shadowColor: Color(0x802196F3),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          width: 180,
-                          height: 200,
-                          child: ClipRRect(
-                            borderRadius: new BorderRadius.circular(24.0),
-                            child: Image(
-                              fit: BoxFit.fill,
-                              image: NetworkImage(_image),
-                            ),
-                          ),),
-                          Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: myDetailsContainer1(restaurantName),
-                          ),
-                        ),
-
-                      ],)
-                ),
-              ),
-            ),
+  Widget _boxes(String _image, double lat, double long, String restaurantName) {
+    return GestureDetector(
+      onTap: () {
+        _gotoLocation(lat, long);
+      },
+      child: Container(
+        child: new FittedBox(
+          child: Material(
+              color: Colors.white,
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(24.0),
+              shadowColor: Color(0x802196F3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    width: 180,
+                    height: 200,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      child: Image(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(_image),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: myDetailsContainer1(restaurantName),
+                    ),
+                  ),
+                ],
+              )),
+        ),
+      ),
     );
   }
 
@@ -275,81 +298,82 @@ Firestore.instance
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Container(
-              child: Text(restaurantName,
+              child: Text(
+            restaurantName,
             style: TextStyle(
                 color: Color(0xff6200ee),
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold),
           )),
         ),
-        SizedBox(height:5.0),
+        SizedBox(height: 5.0),
         Container(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                  child: Text(
-                "4.1",
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 18.0,
-                ),
-              )),
-              Container(
-                child: Icon(
-                  FontAwesomeIcons.solidStar,
-                  color: Colors.amber,
-                  size: 15.0,
-                ),
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Container(
+                child: Text(
+              "4.1",
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 18.0,
               ),
-              Container(
-                child: Icon(
-                  FontAwesomeIcons.solidStar,
-                  color: Colors.amber,
-                  size: 15.0,
-                ),
+            )),
+            Container(
+              child: Icon(
+                FontAwesomeIcons.solidStar,
+                color: Colors.amber,
+                size: 15.0,
               ),
-              Container(
-                child: Icon(
-                  FontAwesomeIcons.solidStar,
-                  color: Colors.amber,
-                  size: 15.0,
-                ),
+            ),
+            Container(
+              child: Icon(
+                FontAwesomeIcons.solidStar,
+                color: Colors.amber,
+                size: 15.0,
               ),
-              Container(
-                child: Icon(
-                  FontAwesomeIcons.solidStar,
-                  color: Colors.amber,
-                  size: 15.0,
-                ),
+            ),
+            Container(
+              child: Icon(
+                FontAwesomeIcons.solidStar,
+                color: Colors.amber,
+                size: 15.0,
               ),
-              Container(
-                child: Icon(
-                  FontAwesomeIcons.solidStarHalf,
-                  color: Colors.amber,
-                  size: 15.0,
-                ),
+            ),
+            Container(
+              child: Icon(
+                FontAwesomeIcons.solidStar,
+                color: Colors.amber,
+                size: 15.0,
               ),
-               Container(
-                  child: Text(
-                "(946)",
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 18.0,
-                ),
-              )),
-            ],
-          )),
-          SizedBox(height:5.0),
+            ),
+            Container(
+              child: Icon(
+                FontAwesomeIcons.solidStarHalf,
+                color: Colors.amber,
+                size: 15.0,
+              ),
+            ),
+            Container(
+                child: Text(
+              "(946)",
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 18.0,
+              ),
+            )),
+          ],
+        )),
+        SizedBox(height: 5.0),
         Container(
-                  child: Text(
-                "American \u00B7 \u0024\u0024 \u00B7 1.6 mi",
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 18.0,
-                ),
-              )),
-              SizedBox(height:5.0),
+            child: Text(
+          "American \u00B7 \u0024\u0024 \u00B7 1.6 mi",
+          style: TextStyle(
+            color: Colors.black54,
+            fontSize: 18.0,
+          ),
+        )),
+        SizedBox(height: 5.0),
         Container(
             child: Text(
           "Closed \u00B7 Opens 17:00 Thu",
@@ -368,33 +392,42 @@ Firestore.instance
       width: MediaQuery.of(context).size.width,
       child: GoogleMap(
         mapType: MapType.normal,
-        initialCameraPosition:  CameraPosition(target: LatLng(position.latitude,position.longitude), zoom: 15),
+        initialCameraPosition: CameraPosition(
+            target: LatLng(position.latitude, position.longitude), zoom: 15),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
-        markers:  Set<Marker>.of(markers.values),
-        // {
-        //   newyork1Marker,newyork2Marker,newyork3Marker,gramercyMarker,bernardinMarker,blueMarker,current,
-        // },
+        markers: {
+          newyork1Marker,
+          newyork2Marker,
+          newyork3Marker,
+          gramercyMarker,
+          bernardinMarker,
+          blueMarker,
+          current,
+        },
       ),
     );
   }
 
-  Future<void> _gotoLocation(double lat,double long) async {
+  Future<void> _gotoLocation(double lat, double long) async {
     final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat, long), zoom: 15,tilt: 50.0,
-      bearing: 45.0,)));
+    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: LatLng(lat, long),
+      zoom: 15,
+      tilt: 50.0,
+      bearing: 45.0,
+    )));
   }
 }
 
 Marker current = Marker(
-  markerId: MarkerId('home'),
-  position: LatLng(position.latitude,position.longitude),
-  icon: BitmapDescriptor.defaultMarkerWithHue(
-    BitmapDescriptor.hueAzure,
-  ),
-  infoWindow:InfoWindow(title: "Home")
-);
+    markerId: MarkerId('home'),
+    position: LatLng(position.latitude, position.longitude),
+    icon: BitmapDescriptor.defaultMarkerWithHue(
+      BitmapDescriptor.hueAzure,
+    ),
+    infoWindow: InfoWindow(title: "Home"));
 
 Marker gramercyMarker = Marker(
   markerId: MarkerId('gramercy'),
@@ -465,7 +498,7 @@ Marker newyork3Marker = Marker(
 //   @override
 //   Widget build(BuildContext context) {
 //     return Container(
-      
+
 //     );
 //   }
 // }
