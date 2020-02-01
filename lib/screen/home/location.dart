@@ -103,7 +103,7 @@ Firestore db = Firestore.instance;
   void initState()  {
     // Future.delayed(Duration.zero, () {
       //  getMarker();
-      submitAll();
+      // submitAll();
       // print(markerIDs);
       
       _child = SpinKitFadingCircle(
@@ -116,7 +116,7 @@ Firestore db = Firestore.instance;
         },
       );
     // });
-    // getCurrentLocation();
+    getCurrentLocation();
 
     super.initState();
   }

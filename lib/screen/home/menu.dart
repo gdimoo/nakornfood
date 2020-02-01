@@ -1,5 +1,5 @@
+import 'package:arfood/screen/home/detailmenu.dart';
 import 'package:arfood/screen/home/home.dart';
-import 'package:arfood/screen/home/showmenu.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -30,59 +30,59 @@ class _MenuState extends State<Menu> {
     {
       "name": "แฮมเบอร์เกอร์",
       "location": "572 Statan NY, 12483",
-      "type": "Higher Secondary School",
+      "type": "ตัวเนื้อสเต็กเราใช้เนื้อชิ้นใหญ่ รสชาติกลมกล่อมเผ็ดร้อนกำลังดี       ",
       "logoText":
           "https://positioningmag.com/wp-content/uploads/2019/10/open_mcdonaldPlantbased1.jpg"
     },
     {
       "name": "ปลากระพงราดพริก",
       "location": "234 Road Kathmandu, Nepal",
-      "type": "Higher Secondary School",
+      "type": "ปลากระพงราดพริกรสชาติเผ็ดร้อนสะใจ",
       "logoText":
           "http://static.asiawebdirect.com/m/phuket/portals/phuket-com/homepage/dining/howto/pagePropertiesImage/thai-food.jpg"
     },
     {
-      "name": "Kinder Garden",
+      "name": "ข้าวราดหน้าผัดเนื้อ",
       "location": "572 Statan NY, 12483",
-      "type": "Play Group School",
+      "type": "ข้าวสวยหอมๆ โรยหน้าด้วยผัดเนื้อ และผัดผักรวมกัน",
       "logoText":
-          "https://cdn.pixabay.com/photo/2016/06/09/18/36/logo-1446293_960_720.png"
+          "https://firebasestorage.googleapis.com/v0/b/foodmanage-e63a1.appspot.com/o/Rice%20garnish%20with%20sauteed%20meat%20and%20vegetables%20mix.jpg?alt=media&token=b8998ffd-4232-47bd-8a3b-f0bf0cf38e86"
     },
     {
-      "name": "WilingTon Cambridge",
+      "name": "ปลาหมักซอสทอด",
       "location": "Kasai Pantan NY, 12483",
-      "type": "Lower Secondary School",
+      "type": "คัดสรรวัตถุดิบอย่างดี เนื้อปลาหมักซอสนุ่มๆ เสิร์ฟพร้อมกับผัก",
       "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
+          "https://firebasestorage.googleapis.com/v0/b/foodmanage-e63a1.appspot.com/o/Grilled%20fish%20close%20up%20decorated%20with%20vegetables%20Free%20Photo.jpg?alt=media&token=163922b0-d38b-403d-b2bc-16b616493c4a"
     },
-    {
-      "name": "Fredik Panlon",
-      "location": "572 Statan NY, 12483",
-      "type": "Higher Secondary School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/03/16/21/18/logo-2150297_960_720.png"
-    },
-    {
-      "name": "Whitehouse International",
-      "location": "234 Road Kathmandu, Nepal",
-      "type": "Higher Secondary School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/31/13/14/animal-2023924_960_720.png"
-    },
-    {
-      "name": "Haward Play",
-      "location": "572 Statan NY, 12483",
-      "type": "Play Group School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2016/06/09/18/36/logo-1446293_960_720.png"
-    },
-    {
-      "name": "Campare Handeson",
-      "location": "Kasai Pantan NY, 12483",
-      "type": "Lower Secondary School",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
-    },
+    // {
+    //   "name": "Fredik Panlon",
+    //   "location": "572 Statan NY, 12483",
+    //   "type": "Higher Secondary School",
+    //   "logoText":
+    //       "https://cdn.pixabay.com/photo/2017/03/16/21/18/logo-2150297_960_720.png"
+    // },
+    // {
+    //   "name": "Whitehouse International",
+    //   "location": "234 Road Kathmandu, Nepal",
+    //   "type": "Higher Secondary School",
+    //   "logoText":
+    //       "https://cdn.pixabay.com/photo/2017/01/31/13/14/animal-2023924_960_720.png"
+    // },
+    // {
+    //   "name": "Haward Play",
+    //   "location": "572 Statan NY, 12483",
+    //   "type": "Play Group School",
+    //   "logoText":
+    //       "https://cdn.pixabay.com/photo/2016/06/09/18/36/logo-1446293_960_720.png"
+    // },
+    // {
+    //   "name": "Campare Handeson",
+    //   "location": "Kasai Pantan NY, 12483",
+    //   "type": "Lower Secondary School",
+    //   "logoText":
+    //       "https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
+    // },
   ];
 
   @override
@@ -207,8 +207,15 @@ class _MenuState extends State<Menu> {
     return 
     GestureDetector(
        onTap: (){
-           Navigator.push
-        (context,MaterialPageRoute(builder: (context) => Showmenu()));
+           Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return DetailmenuScreen(tag:  Menu[index]['logoText'], 
+                      url:Menu[index]['logoText'],
+                      menu: [ Menu[index]['logoText'],
+                      Menu[index]['name'],
+                      Menu[index]['type']
+                      ]);
+
+                    }));
         },
         child: new Container(
       
@@ -237,10 +244,12 @@ class _MenuState extends State<Menu> {
               // borderRadius: BorderRadius.all(),
         borderRadius: BorderRadius.all(Radius.circular(10)),
 
-              image: DecorationImage(
-                  image: CachedNetworkImageProvider(Menu[index]['logoText']),
-                  fit: BoxFit.cover 
-                  ),
+              
+            ),
+             child:ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              child: FadeInImage.assetNetwork(placeholder: "assets/images/loading.gif", image: Menu[index]['logoText'],
+                fit: BoxFit.cover,)
             ),
           )
 
@@ -291,7 +300,7 @@ class _MenuState extends State<Menu> {
           ),
           Center(
             child:Text(
-      "1500฿",
+      "200฿",
       textAlign: TextAlign.center,
       style: TextStyle(
         fontFamily: "Anakotmai",

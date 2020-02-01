@@ -12,10 +12,20 @@ class MyWebview extends StatefulWidget {
 
 class _MyWebviewState extends State<MyWebview> {
   
+  JavascriptChannel _toasterJavascriptChannel(BuildContext context) {
+    return JavascriptChannel(
+        name: '_Toaster',
+        onMessageReceived: (JavascriptMessage message) {
+          Scaffold.of(context).showSnackBar(
+            SnackBar(content: Text(message.message)),
+          );
+        });
+  }
   String url1="https://alligator.io";
   String url2="https://nakornfood.pythonanywhere.com/ar";
   Completer<WebViewController> _controller = Completer<WebViewController>();
   @override
+
    Widget build(BuildContext context) {
     // return 
 return Scaffold(
@@ -28,10 +38,15 @@ return Scaffold(
         // ],
       ),
       body: WebView(
-        initialUrl: 'https://en.wikipedia.org/wiki/Kraken',
+        // initialUrl: 'https://en.wikipedia.org/wiki/Kraken',
+        initialUrl: 'https://appr.tc/r/158489234',
+
         onWebViewCreated: (WebViewController webViewController) {
           _controller.complete(webViewController);
         },
+        javascriptChannels: <JavascriptChannel>[
+                  _toasterJavascriptChannel(context),
+                ].toSet(),
       ),
       // floatingActionButton: _bookmarkButton(),
     );

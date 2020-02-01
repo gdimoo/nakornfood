@@ -1,5 +1,6 @@
-import 'package:arfood/screen/home/arcam.dart';
+// import 'package:arfood/screen/home/arcam.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Showmenu extends StatefulWidget {
   @override
@@ -37,10 +38,7 @@ return Scaffold(
 
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
   floatingActionButton: FloatingActionButton.extended(
-      onPressed: () {
-        Navigator.push
-        (context,MaterialPageRoute(builder: (context) => MyWebview()),
-  );},
+      onPressed:_launchURL,
       label:Text(
       "arcam",
       textAlign: TextAlign.center,
@@ -57,5 +55,13 @@ return Scaffold(
       backgroundColor: Colors.white,
     ),
           );
+  }
+}
+_launchURL() async {
+  const url = 'https://nakornfood.pythonanywhere.com/ar';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

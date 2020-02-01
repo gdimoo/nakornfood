@@ -405,7 +405,10 @@ class _CartState extends State<Cart> {
 
           ),
           Center(
-            child:Text(
+
+            child:FlatButton(
+              onPressed:null, 
+            child: Text(
       "ลบรายการ",
       textAlign: TextAlign.center,
       style: TextStyle(
@@ -416,7 +419,8 @@ class _CartState extends State<Cart> {
         
         
       ),
-            ),),
+            ),)
+            ),
 
           
       

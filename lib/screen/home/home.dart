@@ -39,9 +39,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
   floatingActionButton: FloatingActionButton(
     onPressed: () { _onItemTapped(2);},
-    tooltip: 'Increment',
+    // tooltip: 'Increment',
     child:Icon(Icons.room,color:Colors.red,size: 65,),
-    backgroundColor: Color(0x00000000),
+    backgroundColor: Colors.white,
     // backgroundColor: Colors.white,
     elevation: 0.0,
   ),

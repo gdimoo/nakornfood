@@ -1,9 +1,11 @@
-// import 'package:arfood/screen/home/cart.dart';
-// import 'package:arfood/screen/home/menu.dart';
+
 import 'package:arfood/screen/home/listview.dart';
 import 'package:arfood/screen/home/menu.dart';
+import 'package:arfood/screen/home/detail.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 final List<String> imgList = [
   'https://firebasestorage.googleapis.com/v0/b/foodmanage-e63a1.appspot.com/o/promo1.png?alt=media&token=0fb0327e-7de2-40a4-b737-d710f9843cf9',
@@ -78,26 +80,37 @@ class CarouselDemo extends StatelessWidget {
       enlargeCenterPage: true,
       items: imgList.map(
         (url) {
-          return Container(
-            margin: EdgeInsets.all(5.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              child: Image.network(
-                url,
-                fit: BoxFit.cover,
-                height: MediaQuery.of(context).size.height * 0.3,
-                width: 1000.0,
-              ),
-            ),
-          );
+          return GestureDetector(
+              child: Container(
+                  margin: EdgeInsets.all(5.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    child: Hero(
+                      tag: url,
+                      child: CachedNetworkImage(
+                        imageUrl: url,
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        fit:  BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  ),
+                  onTap: () {
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) {
+                      return DetailScreen(tag: url, url: url);
+                    }));
+                  }
+                  );
         },
       ).toList(),
     );
 
     return
-        // MaterialApp(
-        //   // title: 'demo',
-        //   home:
+        MaterialApp(
+          // title: 'demo',
+          home:
         Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xfff5f5f2),
@@ -191,7 +204,7 @@ class CarouselDemo extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Menu()),
+                          CupertinoPageRoute(builder: (context) => Menu()),
                         );
                       }),
                 ],
@@ -203,7 +216,7 @@ class CarouselDemo extends StatelessWidget {
           Listview(),
         ],
       ),
-      // ),
+      ),
     );
   }
 }
