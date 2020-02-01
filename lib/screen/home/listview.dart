@@ -51,13 +51,8 @@ class Listview extends StatelessWidget {
                                 BorderRadius.all(Radius.circular(5.0)),
                             child: Hero(
                               tag: menu[index]['logoText'],
-                              child: CachedNetworkImage(
-                                  imageUrl: menu[index]['logoText'],
-                                  placeholder: (context, imageUrl) =>
-                                      CircularProgressIndicator(),
-                                  errorWidget: (context, imageUrl, error) =>
-                                      Icon(Icons.error),
-                                  fit: BoxFit.fill),
+                              child: FadeInImage.assetNetwork(placeholder: "assets/images/loading.gif", image: menu[index]['logoText'],
+                fit: BoxFit.cover,),
                             ),
                           ),
                         ),

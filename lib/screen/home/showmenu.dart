@@ -51,7 +51,6 @@ return Scaffold(
         
       ),
     ),
-      icon: new Image.asset("assets/img/logo.png"),
       backgroundColor: Colors.white,
     ),
           );

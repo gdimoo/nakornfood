@@ -203,7 +203,7 @@ Text(
         
       ),
     ),
-      icon: new Image.asset("assets/img/logo.png"),
+      icon: new Image.asset("assets/img/power.png"),
       backgroundColor: Colors.white,
     ),
           );

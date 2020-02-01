@@ -292,7 +292,6 @@ class _CartState extends State<Cart> {
         
       ),
     ),
-      // icon: new Image.asset("assets/img/logo.png"),
       color: Color(0xffffcc2a),
     
 
